@@ -59,7 +59,11 @@ const item_order := PoolStringArray([
 	"guitar_black",
 	"guitar_pink",
 	"guitar_gold",
-	"tambourine"
+	"tambourine",
+	# Prop_Items
+	"prop_island_tiny",
+	"prop_island_med",
+	"prop_island_big"
 ])
 
 # Dictionary of item name to its index in the desired sort order.
@@ -118,10 +122,10 @@ class CustomSorter:
 	const NOT_FOUND_IDX = 100_000
 	var item_order_idx_dict: Dictionary
 	
-	func _init(item_order_idx_dict_arg: Dictionary):
+	func _init(item_order_idx_dict_arg: Dictionary) -> void:
 		item_order_idx_dict = item_order_idx_dict_arg
 	
-	func sort(a: Dictionary, b: Dictionary):
+	func sort(a: Dictionary, b: Dictionary) -> bool:
 		# Keep favorites at beginning of inventory.
 		var is_a_favorited = PlayerData.locked_refs.has(a["ref"])
 		var is_b_favorited = PlayerData.locked_refs.has(b["ref"])
@@ -133,8 +137,11 @@ class CustomSorter:
 		var a_idx := item_order_idx_dict.get(a["id"], NOT_FOUND_IDX) as int
 		var b_idx := item_order_idx_dict.get(b["id"], NOT_FOUND_IDX) as int
 		if a_idx == NOT_FOUND_IDX and b_idx == NOT_FOUND_IDX:
-			# If both items are unknown, just sort by item's id string
-			return a["id"] < b["id"]
+			# If both items are unknown, just sort by item name
+			var a_item_name := self._get_item_name(a).to_lower()
+			var b_item_name := self._get_item_name(b).to_lower()
+			return a_item_name < b_item_name
+
 		if a_idx != b_idx:
 			# Sort based on index in item_order
 			return a_idx < b_idx
@@ -143,3 +150,9 @@ class CustomSorter:
 		var a_count := a.get("count", 1) as int
 		var b_count := b.get("count", 1) as int
 		return a_count > b_count
+	
+	
+	# Copied partially from PlayerData._get_item_name()
+	func _get_item_name(item: Dictionary) -> String:
+		var item_name = Globals.item_data[item["id"]]["file"].item_name
+		return item_name
