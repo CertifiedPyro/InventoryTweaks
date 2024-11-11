@@ -80,13 +80,11 @@ func _on_visibility_changed() -> void:
 
 
 func _sort_inventory() -> void:
-#	print("---------- Sorting inventory ----------------------------")
 	var custom_sorter = CustomSorter.new(item_order_idx_dict)
 	
 	# Sort inventory according to desired order in item_order 
 	var sorted_inventory := PlayerData.inventory.duplicate(true) as Array
 	sorted_inventory.sort_custom(custom_sorter, "sort")
-#	print(str(sorted_inventory))
 	
 	# Deduplicate items with the same id and ref
 	# This fixes the "infinite beer" glitch
@@ -112,10 +110,7 @@ func _sort_inventory() -> void:
 			found_item["count"] += item["count"]
 		else:
 			new_inventory.append(item)
-#	print("----------------------------")
-#	print(str(new_inventory))
 	
-#	PlayerData.inventory = sorted_inventory
 	PlayerData.inventory = new_inventory
 
 
@@ -127,10 +122,18 @@ class CustomSorter:
 		item_order_idx_dict = item_order_idx_dict_arg
 	
 	func sort(a: Dictionary, b: Dictionary):
+		# Keep favorites at beginning of inventory.
+		var is_a_favorited = PlayerData.locked_refs.has(a["ref"])
+		var is_b_favorited = PlayerData.locked_refs.has(b["ref"])
+		if is_a_favorited and not is_b_favorited:
+			return true
+		if not is_a_favorited and is_b_favorited:
+			return false
+		
 		var a_idx := item_order_idx_dict.get(a["id"], NOT_FOUND_IDX) as int
 		var b_idx := item_order_idx_dict.get(b["id"], NOT_FOUND_IDX) as int
 		if a_idx == NOT_FOUND_IDX and b_idx == NOT_FOUND_IDX:
-			# If item is unknown, just sort by item's id string
+			# If both items are unknown, just sort by item's id string
 			return a["id"] < b["id"]
 		if a_idx != b_idx:
 			# Sort based on index in item_order

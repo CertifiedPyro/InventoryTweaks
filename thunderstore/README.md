@@ -2,8 +2,6 @@
 
 A mod that adds QoL features for the inventory.
 
-[Thunderstore Link](https://thunderstore.io/c/webfishing/p/CertifiedPyro/Inventory_Tweaks/)
-
 <img src="https://github.com/user-attachments/assets/fd481f2d-b09e-4f96-8f6e-603f2d4159f6" width=800>
 
 ## Current Features
