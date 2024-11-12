@@ -1,3 +1,11 @@
+# 1.1.0
+
+### Added
+- Treasure chests are now stacked
+
+### Fixed
+- Change the order of chalk to follow rainbow instead of shop order
+
 ## 1.0.1
 
 ### Fixed

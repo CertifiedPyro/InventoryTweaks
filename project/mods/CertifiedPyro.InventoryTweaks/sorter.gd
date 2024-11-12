@@ -44,13 +44,13 @@ const item_order := PoolStringArray([
 	"hand_labeler",
 	"ringbox",
 	# Item_Chalk
-	"chalk_eraser",  # Out of order from store order, but more convenient
-	"chalk_white",
-	"chalk_black",
+	"chalk_eraser",
 	"chalk_red",
-	"chalk_blue",
 	"chalk_yellow",
 	"chalk_green",
+	"chalk_blue",
+	"chalk_white",
+	"chalk_black",
 	"chalk_special",
 	# Item_Tools (instruments)
 	"guitar",
@@ -86,12 +86,12 @@ func _on_visibility_changed() -> void:
 func _sort_inventory() -> void:
 	var custom_sorter = CustomSorter.new(item_order_idx_dict)
 	
-	# Sort inventory according to desired order in item_order 
+	# Sort inventory according to desired order in item_order.
 	var sorted_inventory := PlayerData.inventory.duplicate(true) as Array
 	sorted_inventory.sort_custom(custom_sorter, "sort")
 	
-	# Deduplicate items with the same id and ref
-	# This fixes the "infinite beer" glitch
+	# Deduplicate items with the same id and ref, and treasure chests.
+	# This fixes the "infinite beer" glitch.
 	var new_inventory := []
 	var item_id := ""
 	var items := []
@@ -102,14 +102,14 @@ func _sort_inventory() -> void:
 			new_inventory.append(item)
 			continue
 		
-		# Try to find duplicate ref
+		# Try to find duplicate refs and treasure chests.
 		var found_item = null
 		for search_item in items:
-			if item["ref"] == search_item["ref"]:
+			if item["ref"] == search_item["ref"] or item["id"] == "treasure_chest":
 				found_item = search_item
 				break
 		
-		# If duplicate ref found, add count to existing item
+		# If duplicate found, add count to existing item
 		if found_item != null:
 			found_item["count"] += item["count"]
 		else:

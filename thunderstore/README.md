@@ -8,7 +8,7 @@ A mod that adds QoL features for the inventory.
 - Sorts inventory in a predetermined order for convenience:
   - Scratch-off tickets
   - Fishing buddies + portable bait station
-  - Treasure chests
+  - Treasure chests (now stackable!)
   - Consumable items (drinks)
   - Fishing rods
   - Misc tools (metal detector, boxing gloves, hand labeler, ringbox)
