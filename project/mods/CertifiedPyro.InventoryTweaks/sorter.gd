@@ -71,8 +71,6 @@ var item_order_idx_dict := {}
 
 
 func _ready() -> void:
-	PlayerData.connect("_inventory_refresh", self, "_sort_inventory")
-	
 	for i in range(item_order.size()):
 		item_order_idx_dict[item_order[i]] = i
 	
@@ -81,6 +79,7 @@ func _ready() -> void:
 
 func _on_visibility_changed() -> void:
 	_sort_inventory()
+	PlayerData.emit_signal("_inventory_refresh")
 
 
 func _sort_inventory() -> void:
@@ -90,8 +89,8 @@ func _sort_inventory() -> void:
 	var sorted_inventory := PlayerData.inventory.duplicate(true) as Array
 	sorted_inventory.sort_custom(custom_sorter, "sort")
 	
-	# Deduplicate items with the same id and ref, and treasure chests.
-	# This fixes the "infinite beer" glitch.
+	# Deduplicate items with the same id and ref, which fixes the "infinite beer" glitch.
+	# Also dedup treasure chests.
 	var new_inventory := []
 	var item_id := ""
 	var items := []
