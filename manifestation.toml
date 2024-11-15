@@ -1,7 +1,7 @@
 id = "CertifiedPyro.InventoryTweaks"
 name = "Inventory_Tweaks"
-description = "Adds inventory sorting, for a cleaner inventory!"
-version = "1.1.0"
+description = "QOL inventory features, like automatic sorting and keyboard navigation!"
+version = "1.2.0"
 homepage = "https://github.com/CertifiedPyro/InventoryTweaks"
 author = "CertifiedPyro"
 

@@ -1,11 +1,14 @@
 # Inventory Tweaks
 
-A mod that adds QoL features for the inventory.
+A mod that adds several QoL features for the inventory, such as automatic sorting and keyboard navigation.
 
-<img src="https://github.com/user-attachments/assets/fd481f2d-b09e-4f96-8f6e-603f2d4159f6" width=800>
+<img src="https://github.com/user-attachments/assets/6845d8af-27b2-48a3-9901-5f729630bb12" width=800>
 
 ## Features
-- Sorts inventory in a predetermined order for convenience:
+
+### Automatic sorting
+- Tools are sorted by convenience:
+  - Favorited items
   - Scratch-off tickets
   - Fishing buddies + portable bait station
   - Treasure chests (now stackable!)
@@ -14,9 +17,21 @@ A mod that adds QoL features for the inventory.
   - Misc tools (metal detector, boxing gloves, hand labeler, ringbox)
   - Chalk
   - Instruments
-- Favorited items stay at the front of the inventory.
-- Fish are sorted by alphabetical order.
-- Props are sorted by alphabetical order, with the island props at the front.
+- Creatures:
+  - Important metal detector loot (hat, monocle, sword, and watch pieces)
+  - Junk metal detector loot (button, coin, etc.)
+  - Fish (in alphabetical order)
+- Props:
+  - Island props (tiny, medium, and large flags)
+  - Remaining props (in alphabetical order)
+- Bait in sell shop is sorted by unlock order.
+
+### Menu navigation via keyboard
+
+- Use number keys to navigate top-level menus
+  - "1' for inventory, "2" for journal, "3" for outfits, "4" for inbox, and "5" for players
+- Use "Q" and "E" keys to navigate submenus
+  - e.g. freshwater/saltwater/misc fish under journal, cosmetic categories under outfits, etc.
 
 ## Important note
 
@@ -24,5 +39,6 @@ This mod can affect how your inventory is stored in your save file.
 It is recommended to backup your save file before enabling this mod.
 
 ## Upcoming Features
+- Auto sort cosmetics by category/color
 - Filter inventory by category
 - Change sort order
