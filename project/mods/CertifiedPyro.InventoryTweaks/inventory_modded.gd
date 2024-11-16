@@ -32,8 +32,8 @@ const ITEM_ORDER := PoolStringArray([
 	"potion_bouncebig",
 	# Item_Tools (fishing rods)
 	"fishing_rod_simple",
-	"fishing_rod_travelers",
 	"fishing_rod_skeleton",  # Spectral rod before collector's rods
+	"fishing_rod_travelers",
 	"fishing_rod_collectors",
 	"fishing_rod_collectors_shining",
 	"fishing_rod_collectors_glistening",
