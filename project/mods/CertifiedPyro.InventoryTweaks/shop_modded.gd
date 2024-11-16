@@ -1,4 +1,6 @@
 extends Control
+# Implements modded shop behavior:
+# - Sort bait
 
 
 const Shop := preload("res://Scenes/HUD/Shop/shop.gd")

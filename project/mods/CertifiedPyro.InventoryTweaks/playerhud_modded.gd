@@ -1,4 +1,7 @@
 extends Control
+# Implements modded player hud behavior:
+# - Allow keyboard navigation of top-level menus with 1-5 number keys
+# - Disable keyboard navigation of top-level menus with Q and E keys
 
 
 const PlayerHud := preload("res://Scenes/HUD/playerhud.gd")

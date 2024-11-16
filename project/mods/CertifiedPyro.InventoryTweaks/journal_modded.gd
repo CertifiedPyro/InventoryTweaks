@@ -1,4 +1,6 @@
 extends Control
+# Implements modded journal behavior:
+# - Allow keyboard navigation of submenus with Q and E keys
 
 
 const Journal := preload("res://Scenes/HUD/journal.gd")

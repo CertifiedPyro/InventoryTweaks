@@ -1,4 +1,6 @@
 extends Control
+# Implements modded cosmetic menu behavior:
+# - Allow keyboard navigation of submenus with Q and E keys
 
 
 const CosmeticMenu := preload("res://Scenes/HUD/CosmeticMenu/cosmetic_menu.gd")
@@ -34,7 +36,6 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 	var active_idx := -1
 	for i in range(num_tabs):
 		var tab := cosmetic_tabs[i] as Button
-		print(tab.name + ", " + cosmetic_menu.category)
 		if tab.name == cosmetic_menu.category:
 			active_idx = i
 			break
