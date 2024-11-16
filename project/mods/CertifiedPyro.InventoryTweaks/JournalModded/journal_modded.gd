@@ -1,4 +1,6 @@
 extends Control
+# Implements modded journal behavior:
+# - Allow keyboard navigation of submenus with Q and E keys
 
 
 const Journal := preload("res://Scenes/HUD/journal.gd")
@@ -6,9 +8,10 @@ const MAIN_THEME := preload("res://Assets/Themes/main.tres")
 
 const HOTKEY_LABEL_GROUP = "cpit_journal_hotkey_label"
 
-var journal_tabs := []
 var first_hotkey_label_template: Button
 var last_hotkey_label_template: Button
+
+var journal_tabs := []
 
 onready var journal := get_parent() as Journal
 onready var journal_tabs_node := get_parent().get_node("journal_buttons")

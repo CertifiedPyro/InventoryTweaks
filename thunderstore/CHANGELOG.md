@@ -1,4 +1,13 @@
-# 1.2.0
+## 1.3.0
+
+### Added
+- Add sorting for cosmetics.
+  - Sorted categories: primary/secondary colors, all face and clothes cosmetics, titles, and bobbers.
+
+### Fixed
+- Move spectral rod before traveller's rod.
+
+## 1.2.0
 
 ### Added
 - Add keyboard navigation for backpack menu.
@@ -11,7 +20,7 @@
 ### Fixed
 - Fix bug where treasure chests show as "empty" when obtained.
 
-# 1.1.0
+## 1.1.0
 
 ### Added
 - Treasure chests are now stacked.

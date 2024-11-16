@@ -6,9 +6,21 @@ A mod that adds several QoL features for the inventory, such as automatic sortin
 
 <img src="https://github.com/user-attachments/assets/6845d8af-27b2-48a3-9901-5f729630bb12" width=800>
 
+## Important note
+
+**This mod can affect how your inventory is stored in your save file.
+It is recommended to backup your save file before enabling this mod.**
+
 ## Features
 
-### Automatic sorting
+### Menu navigation via keyboard
+
+- Use number keys to navigate top-level menus
+  - "1' for inventory, "2" for journal, "3" for outfits, "4" for inbox, and "5" for players
+- Use "Q" and "E" keys to navigate submenus
+  - e.g. freshwater/saltwater/misc fish under journal, cosmetic categories under outfits, etc.
+
+### Automatic inventory sorting
 - Tools are sorted by convenience:
   - Favorited items
   - Scratch-off tickets
@@ -28,18 +40,28 @@ A mod that adds several QoL features for the inventory, such as automatic sortin
   - Remaining props (in alphabetical order)
 - Bait in sell shop is sorted by unlock order.
 
-### Menu navigation via keyboard
+### Automatic cosmetics sorting
+In general, colors are sorted by rainbow -> brown -> white -> gray -> black.
 
-- Use number keys to navigate top-level menus
-  - "1' for inventory, "2" for journal, "3" for outfits, "4" for inbox, and "5" for players
-- Use "Q" and "E" keys to navigate submenus
-  - e.g. freshwater/saltwater/misc fish under journal, cosmetic categories under outfits, etc.
+#### Body
+- Primary/secondary colors are sorted
 
-## Important note
+#### Face
+- Eyes: sleepy -> focused -> animal -> cross-eyed -> side-eye -> misc -> line/dot
+- Noses: default -> filled -> line -> misc
+- Mouths: default -> animal -> line -> misc line -> tongue/open mouth -> grimace
 
-This mod can affect how your inventory is stored in your save file.
-It is recommended to backup your save file before enabling this mod.
+#### Clothes
+- Hats: baseball caps -> bucket hats -> cowboy hats -> beanies -> misc
+- Undershirts: graphic tees -> LGBT tees -> tees -> tank-tops
+- Overshirts: open flannels -> closed flannels -> hoodies -> vests -> overalls -> misc
+- Pants: long pants -> short pants
+- Accessories: sorted generally from head to toe
 
-## Upcoming Features
-- Filter inventory by category
+#### Misc
+- Titles: rank titles -> other (in alphabetical order)
+- Bobbers: shop order
+
+## Planned Features
 - Change sort order
+- Filter inventory by category

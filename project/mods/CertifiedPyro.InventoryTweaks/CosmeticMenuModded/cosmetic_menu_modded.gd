@@ -1,20 +1,30 @@
 extends Control
+# Implements modded cosmetic menu behavior:
+# - Allow keyboard navigation of submenus with Q and E keys
 
 
+const Constants := preload("res://mods/CertifiedPyro.InventoryTweaks/CosmeticMenuModded/cosmetic_menu_constants.gd")
 const CosmeticMenu := preload("res://Scenes/HUD/CosmeticMenu/cosmetic_menu.gd")
 const MAIN_THEME := preload("res://Assets/Themes/main.tres")
 
 const HOTKEY_LABEL_GROUP = "cpit_cosmetic_menu_hotkey_label"
 
-var cosmetic_tabs := []
 var first_hotkey_label_template: Button
 var last_hotkey_label_template: Button
+
+# Dictionary of cosmetic name to its index in the desired sort order.
+var cosmetic_order_idx_dict := {}
+var cosmetic_tabs := []
 
 onready var cosmetic_menu := get_parent() as CosmeticMenu
 onready var cosmetic_tabs_node := get_parent().get_node("HBoxContainer")
 
 
 func _ready() -> void:
+	for i in range(Constants.COSMETIC_ORDER.size()):
+		cosmetic_order_idx_dict[Constants.COSMETIC_ORDER[i]] = i
+	
+	_sort_cosmetics()
 	_create_hotkey_label_templates()
 
 
@@ -34,7 +44,6 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 	var active_idx := -1
 	for i in range(num_tabs):
 		var tab := cosmetic_tabs[i] as Button
-		print(tab.name + ", " + cosmetic_menu.category)
 		if tab.name == cosmetic_menu.category:
 			active_idx = i
 			break
@@ -54,10 +63,13 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 
 
 func _on_visibility_changed() -> void:
-	if cosmetic_tabs_node == null:
+	if not is_visible_in_tree():
 		return
 	
-	if not is_visible_in_tree():
+	# Sort cosmetics
+	_sort_cosmetics()
+	
+	if cosmetic_tabs_node == null:
 		return
 	
 	# Remove old hotkey labels.
@@ -75,6 +87,26 @@ func _on_visibility_changed() -> void:
 	var last_label := last_hotkey_label_template.duplicate()
 	(cosmetic_tabs[-1] as Node).add_child(last_label)
 	last_label.add_to_group(HOTKEY_LABEL_GROUP)
+
+
+func _sort_cosmetics() -> void:
+	var custom_sorter = CustomSorter.new(cosmetic_order_idx_dict)
+	
+	# Sort inventory according to desired order in item_order.
+	# Since sort_custom is not stable, separate unsorted cosmetics to preserve order.
+	var cosmetics := PlayerData.cosmetics_unlocked.duplicate(true) as Array
+	var sorted_cosmetics := []
+	var unsorted_cosmetics := []
+	for cosmetic in cosmetics:
+		if cosmetic_order_idx_dict.has(cosmetic):
+			sorted_cosmetics.append(cosmetic)
+		else:
+			unsorted_cosmetics.append(cosmetic)
+	
+	sorted_cosmetics.sort_custom(custom_sorter, "sort")
+	sorted_cosmetics.append_array(unsorted_cosmetics)
+	
+	PlayerData.cosmetics_unlocked = sorted_cosmetics
 
 
 func _get_cosmetic_tabs() -> void:
@@ -112,3 +144,17 @@ func _create_hotkey_label_templates() -> void:
 	
 	var next_action := InputMap.get_action_list("tab_next")[0] as InputEvent
 	last_hotkey_label_template.text = next_action.as_text()
+
+
+class CustomSorter:
+	const NOT_FOUND_IDX = 100_000
+	var item_order_idx_dict: Dictionary
+	
+	func _init(item_order_idx_dict_arg: Dictionary) -> void:
+		item_order_idx_dict = item_order_idx_dict_arg
+	
+	func sort(a: String, b: String) -> bool:
+		# Sort based on index in item_order
+		var a_idx := item_order_idx_dict.get(a, NOT_FOUND_IDX) as int
+		var b_idx := item_order_idx_dict.get(b, NOT_FOUND_IDX) as int
+		return a_idx < b_idx
