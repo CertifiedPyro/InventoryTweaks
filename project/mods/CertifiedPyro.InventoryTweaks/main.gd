@@ -1,10 +1,10 @@
 extends Node
 
-const playerhud_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/playerhud_modded.tscn")
-const inventory_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/inventory_modded.tscn")
-const journal_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/journal_modded.tscn")
-const cosmetic_menu_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/cosmetic_menu_modded.tscn")
-const shop_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/shop_modded.tscn")
+const playerhud_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/PlayerHudModded/playerhud_modded.tscn")
+const inventory_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/InventoryModded/inventory_modded.tscn")
+const journal_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/JournalModded/journal_modded.tscn")
+const cosmetic_menu_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/CosmeticMenuModded/cosmetic_menu_modded.tscn")
+const shop_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/ShopModded/shop_modded.tscn")
 
 
 func _ready() -> void:
