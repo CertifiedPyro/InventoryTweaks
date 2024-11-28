@@ -23,8 +23,18 @@ func _ready() -> void:
 	pass
 
 
+func _on_visibility_changed() -> void:
+	if not self.is_visible_in_tree():
+		return
+	
+	_sort_bait()
+
+
 func _sort_bait() -> void:
 	if not PlayerData.bait_unlocked is Array:
+		return
+	
+	if shop == null:
 		return
 	
 	var unlocked_bait := (PlayerData.bait_unlocked as Array).duplicate(true)
@@ -34,12 +44,4 @@ func _sort_bait() -> void:
 			new_bait_unlocked.append(bait)
 	PlayerData.bait_unlocked = new_bait_unlocked
 	
-	if shop != null:
-		shop._force_refresh()
-
-
-func _on_visibility_changed() -> void:
-	if not self.is_visible_in_tree():
-		return
-	
-	_sort_bait()
+	shop._force_refresh()

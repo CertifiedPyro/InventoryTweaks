@@ -2,9 +2,11 @@ extends Control
 # Implements modded inventory behavior:
 # - Sorts inventory and stacks some previously unstackable items (e.g. treasure chests)
 # - Allow keyboard navigation of submenus with Q and E keys
+# - Allow keyboard navigation of pages with Z and C keys
 
 
 const Constants := preload("res://mods/CertifiedPyro.InventoryTweaks/InventoryModded/inventory_constants.gd")
+const Inventory := preload("res://Scenes/HUD/inventory.gd")
 const MAIN_THEME := preload("res://Assets/Themes/main.tres")
 
 const HOTKEY_LABEL_GROUP = "cpit_inventory_hotkey_label"
@@ -16,7 +18,9 @@ var last_hotkey_label_template: Button
 var item_order_idx_dict := {}
 var inventory_tabs := []
 
+onready var inventory_node := get_parent() as Inventory
 onready var inventory_tabs_node := get_parent().get_node("tabs")
+onready var pages_node := get_parent().get_node("Panel/HBoxContainer")
 
 
 func _ready() -> void:
@@ -25,40 +29,18 @@ func _ready() -> void:
 	
 	_sort_inventory()
 	_create_hotkey_label_templates()
+	_add_page_labels()
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
-	if inventory_tabs_node == null:
-		return
-	
 	if not is_visible_in_tree():
 		return
 	
-	if not event.is_action_pressed("tab_next") and not event.is_action_pressed("tab_prev"):
-		return
+	if event.is_action_pressed("tab_next") or event.is_action_pressed("tab_prev"):
+		_handle_tab_event(event)
 	
-	# Get active tab by checking which button is disabled.
-	_get_inventory_tabs()
-	var num_tabs := inventory_tabs.size()
-	var active_idx := -1
-	for i in range(num_tabs):
-		var tab := inventory_tabs[i] as Button
-		if tab.disabled:
-			active_idx = i
-			break
-	
-	if active_idx == -1:
-		return
-	
-	# Set new active tab based on action taken.
-	if event.is_action_pressed("tab_next"):
-		active_idx += 1
-	elif event.is_action_pressed("tab_prev"):
-		active_idx -= 1
-	active_idx = posmod(active_idx, num_tabs)
-	
-	# Initiate press on the new active tab.
-	(inventory_tabs[active_idx] as Button).emit_signal("pressed")
+	if event.is_action_pressed("page_prev") or event.is_action_pressed("page_next"):
+		_handle_page_event(event)
 
 
 func _on_visibility_changed() -> void:
@@ -87,6 +69,44 @@ func _on_visibility_changed() -> void:
 	var last_label = last_hotkey_label_template.duplicate()
 	(inventory_tabs[-1] as Node).add_child(last_label)
 	last_label.add_to_group(HOTKEY_LABEL_GROUP)
+
+
+func _handle_tab_event(event: InputEventKey) -> void:
+	if inventory_tabs_node == null:
+		return
+	
+	# Get active tab by checking which button is disabled.
+	_get_inventory_tabs()
+	var num_tabs := inventory_tabs.size()
+	var active_idx := -1
+	for i in range(num_tabs):
+		var tab := inventory_tabs[i] as Button
+		if tab.disabled:
+			active_idx = i
+			break
+	
+	if active_idx == -1:
+		return
+	
+	# Set new active tab based on action taken.
+	if event.is_action_pressed("tab_next"):
+		active_idx += 1
+	elif event.is_action_pressed("tab_prev"):
+		active_idx -= 1
+	active_idx = posmod(active_idx, num_tabs)
+	
+	# Initiate press on the new active tab.
+	(inventory_tabs[active_idx] as Button).emit_signal("pressed")
+
+
+func _handle_page_event(event: InputEventKey) -> void:
+	if inventory_node == null:
+		return
+	
+	if event.is_action_pressed("page_prev"):
+		inventory_node._prev_page()
+	elif event.is_action_pressed("page_next"):
+		inventory_node._next_page()
 
 
 func _sort_inventory() -> void:
@@ -147,13 +167,26 @@ func _create_hotkey_label_templates() -> void:
 	
 	# Create hotkey label for first submenu button.
 	first_hotkey_label_template = hotkey_label.duplicate() as Button
-	var prev_action := InputMap.get_action_list("tab_prev")[0] as InputEvent
-	first_hotkey_label_template.text = prev_action.as_text()
+	first_hotkey_label_template.text = CpitUtils.get_key_from_action("tab_prev")
 	
 	# Create hotkey label for last submenu button.
 	last_hotkey_label_template = hotkey_label.duplicate() as Button
-	var next_action := InputMap.get_action_list("tab_next")[0] as InputEvent
-	last_hotkey_label_template.text = next_action.as_text()
+	last_hotkey_label_template.text = CpitUtils.get_key_from_action("tab_next")
+
+func _add_page_labels() -> void:
+	if pages_node == null:
+		return
+	
+	var page_prev_label := Label.new()
+	page_prev_label.text = CpitUtils.get_key_from_action("page_prev") + " "
+	page_prev_label.align = Label.ALIGN_CENTER
+	pages_node.add_child(page_prev_label)
+	pages_node.move_child(page_prev_label, 0)
+	
+	var page_next_label := Label.new()
+	page_next_label.text = " " + CpitUtils.get_key_from_action("page_next")
+	page_next_label.align = Label.ALIGN_CENTER
+	pages_node.add_child(page_next_label)
 
 
 class CustomSorter:

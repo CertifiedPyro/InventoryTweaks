@@ -131,9 +131,7 @@ func _create_hotkey_label_templates() -> void:
 	# Create hotkey label for first submenu button.
 	first_hotkey_label_template = hotkey_label.duplicate() as Button
 	first_hotkey_label_template.margin_left = 8
-	
-	var prev_action := InputMap.get_action_list("tab_prev")[0] as InputEvent
-	first_hotkey_label_template.text = prev_action.as_text()
+	first_hotkey_label_template.text = CpitUtils.get_key_from_action("tab_prev")
 
 	# Create hotkey label for last submenu button.
 	last_hotkey_label_template = hotkey_label.duplicate() as Button
@@ -141,9 +139,7 @@ func _create_hotkey_label_templates() -> void:
 	last_hotkey_label_template.anchor_right = 1
 	last_hotkey_label_template.margin_right = -8
 	last_hotkey_label_template.grow_horizontal = Control.GROW_DIRECTION_BEGIN
-	
-	var next_action := InputMap.get_action_list("tab_next")[0] as InputEvent
-	last_hotkey_label_template.text = next_action.as_text()
+	last_hotkey_label_template.text = CpitUtils.get_key_from_action("tab_next")
 
 
 class CustomSorter:

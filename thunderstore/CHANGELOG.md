@@ -1,3 +1,9 @@
+## 1.4.0
+### Added
+- Add keyboard navigation for switching pages with the "Z" and "C" keys.
+- Add support for alternative keyboard layouts.
+  - e.g. on a French AZERTY keyboard, you would use "A" and "E" to navigate submenus, and "W" and "C" to navigate pages.
+
 ## 1.3.0
 
 ### Added

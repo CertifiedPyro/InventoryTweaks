@@ -4,7 +4,7 @@ A mod that adds several QoL features for the inventory, such as automatic sortin
 
 [Thunderstore Link](https://thunderstore.io/c/webfishing/p/CertifiedPyro/Inventory_Tweaks/)
 
-<img src="https://github.com/user-attachments/assets/6845d8af-27b2-48a3-9901-5f729630bb12" width=800>
+<img src="https://github.com/user-attachments/assets/317b105e-13b2-4ea4-83a2-a0fbf5ab0dc1" width=800>
 
 ## Important note
 
@@ -19,6 +19,10 @@ It is recommended to backup your save file before enabling this mod.**
   - "1' for inventory, "2" for journal, "3" for outfits, "4" for inbox, and "5" for players
 - Use "Q" and "E" keys to navigate submenus
   - e.g. freshwater/saltwater/misc fish under journal, cosmetic categories under outfits, etc.
+- Use "Z" and "C" keys to navigate pages
+
+Note that these keybinds support alternative keyboard layouts.
+For example, on a French AZERTY keyboard, you would use "A" and "E" to navigate submenus, and "W" and "C" to navigate pages.
 
 ### Automatic inventory sorting
 - Tools are sorted by convenience:

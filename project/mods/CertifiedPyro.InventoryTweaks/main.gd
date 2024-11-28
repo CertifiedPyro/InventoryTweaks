@@ -9,8 +9,9 @@ const shop_modded_scene := preload("res://mods/CertifiedPyro.InventoryTweaks/Sho
 
 func _ready() -> void:
 	get_tree().connect("node_added", self, "_init_mod")
+	_register_keybinds()
 
-	
+
 func _init_mod(node: Node) -> void:
 	if node.name == "playerhud":
 		var player_hud := node.get_node("main/menu")
@@ -28,4 +29,27 @@ func _init_mod(node: Node) -> void:
 	elif node.name == "shop":
 		var shop_modded := shop_modded_scene.instance() as Control
 		node.add_child(shop_modded)
+
+
+func _register_keybinds() -> void:
+	# Replace tab_prev and tab_next actions with physical keys
+	InputMap.action_erase_events("tab_prev")
+	var new_tab_prev_event := InputEventKey.new()
+	new_tab_prev_event.physical_scancode = KEY_Q
+	InputMap.action_add_event("tab_prev", new_tab_prev_event)
 	
+	InputMap.action_erase_events("tab_next")
+	var new_tab_next_event := InputEventKey.new()
+	new_tab_next_event.physical_scancode = KEY_E
+	InputMap.action_add_event("tab_next", new_tab_next_event)
+	
+	# Add page_prev and page_next actions with physical keys
+	var new_page_prev_event := InputEventKey.new()
+	new_page_prev_event.physical_scancode = KEY_Z
+	InputMap.add_action("page_prev")
+	InputMap.action_add_event("page_prev", new_page_prev_event)
+	
+	var new_page_next_event := InputEventKey.new()
+	new_page_next_event.physical_scancode = KEY_C
+	InputMap.add_action("page_next")
+	InputMap.action_add_event("page_next", new_page_next_event)
