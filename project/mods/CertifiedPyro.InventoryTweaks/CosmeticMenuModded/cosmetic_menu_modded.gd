@@ -4,6 +4,7 @@ extends Control
 
 
 const Constants := preload("res://mods/CertifiedPyro.InventoryTweaks/CosmeticMenuModded/cosmetic_menu_constants.gd")
+const CpitUtils := preload("res://mods/CertifiedPyro.InventoryTweaks/utils.gd")
 const CosmeticMenu := preload("res://Scenes/HUD/CosmeticMenu/cosmetic_menu.gd")
 const MAIN_THEME := preload("res://Assets/Themes/main.tres")
 

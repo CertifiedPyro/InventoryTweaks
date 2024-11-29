@@ -3,6 +3,7 @@ extends Control
 # - Allow keyboard navigation of submenus with Q and E keys
 
 
+const CpitUtils := preload("res://mods/CertifiedPyro.InventoryTweaks/utils.gd")
 const Journal := preload("res://Scenes/HUD/journal.gd")
 const MAIN_THEME := preload("res://Assets/Themes/main.tres")
 

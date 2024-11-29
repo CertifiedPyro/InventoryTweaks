@@ -6,6 +6,7 @@ extends Control
 
 
 const Constants := preload("res://mods/CertifiedPyro.InventoryTweaks/InventoryModded/inventory_constants.gd")
+const CpitUtils := preload("res://mods/CertifiedPyro.InventoryTweaks/utils.gd")
 const Inventory := preload("res://Scenes/HUD/inventory.gd")
 const MAIN_THEME := preload("res://Assets/Themes/main.tres")
 

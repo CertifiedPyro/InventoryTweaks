@@ -1,6 +1,3 @@
-class_name CpitUtils
-
-
 static func get_key_from_action(action: String) -> String:
 	var action_list := InputMap.get_action_list(action)
 	if action_list.size() == 0:

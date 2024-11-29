@@ -1,3 +1,8 @@
+## 1.4.1
+### Fixed
+- Fix broken UI.
+  - P.S. Lesson learned, don't use `class_name` in a mod.
+
 ## 1.4.0
 ### Added
 - Add keyboard navigation for switching pages with the "Z" and "C" keys.
