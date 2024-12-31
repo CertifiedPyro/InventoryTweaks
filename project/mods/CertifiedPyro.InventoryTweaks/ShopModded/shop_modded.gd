@@ -12,7 +12,8 @@ const BAIT_ORDER = [
 	"leech",
 	"minnow",
 	"squid",
-	"nautilus"
+	"nautilus",
+	"gildedworm"
 ]
 
 onready var shop := get_parent() as Shop
@@ -42,6 +43,12 @@ func _sort_bait() -> void:
 	for bait in BAIT_ORDER:
 		if unlocked_bait.has(bait):
 			new_bait_unlocked.append(bait)
+	
+	# Check if there's any baits that are not in bait order, and just add them to end.
+	for bait in unlocked_bait:
+		if not bait in BAIT_ORDER:
+			new_bait_unlocked.append(bait)
+	
 	PlayerData.bait_unlocked = new_bait_unlocked
 	
 	shop._force_refresh()

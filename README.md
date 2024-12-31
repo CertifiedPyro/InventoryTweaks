@@ -65,7 +65,3 @@ In general, colors are sorted by rainbow -> brown -> white -> gray -> black.
 #### Misc
 - Titles: rank titles -> other (in alphabetical order)
 - Bobbers: shop order
-
-## Planned Features
-- Change sort order
-- Filter inventory by category

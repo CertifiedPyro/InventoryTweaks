@@ -1,3 +1,9 @@
+## 1.4.2
+### Fixed
+- Add gilded worms to sorted bait order.
+- Fix bug where new baits disappear from inventory after buying them.
+  - This was due to a hardcoded order in the code. A failsafe has been added to prevent this from happening again.
+
 ## 1.4.1
 ### Fixed
 - Fix broken UI.
